@@ -1,5 +1,7 @@
 package jp.mappiekochi.sample.semantickernel.webapi.config;
 
+import jp.mappiekochi.sample.semantickernel.webapi.plugin.DateTimePlugin;
+
 import com.azure.ai.openai.OpenAIAsyncClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.core.credential.AzureKeyCredential;
@@ -7,6 +9,8 @@ import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.agents.chatcompletion.ChatCompletionAgent;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatCompletion;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
+import com.microsoft.semantickernel.plugin.KernelPlugin;
+import com.microsoft.semantickernel.plugin.KernelPluginFactory;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -42,6 +46,7 @@ public class SemanticKernelConfig {
     public Kernel kernel(ChatCompletionService chatCompletionService) {
         return Kernel.builder()
                 .withAIService(ChatCompletionService.class, chatCompletionService)
+                .withPlugin(dateTimePlugin())
                 .build();
     }
 
@@ -60,5 +65,10 @@ public class SemanticKernelConfig {
                 .withKernel(kernel)
                 .withInvocationContext(invocationContext)
                 .build();
+    }
+
+    @Bean
+    public KernelPlugin dateTimePlugin() {
+        return KernelPluginFactory.createFromObject(new DateTimePlugin(), "DateTimePlugin");
     }
 }

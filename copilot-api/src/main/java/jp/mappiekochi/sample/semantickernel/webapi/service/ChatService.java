@@ -29,7 +29,9 @@ public class ChatService {
     public Mono<ChatMessageResponse> chat(ChatMessageRequest request) {
         try {
             ChatCompletionService chatService = kernel.getService(ChatCompletionService.class);
-            ChatHistory chatHistory = request.context().createChatHistory();
+            ChatHistory chatHistory = request.context() != null
+                    ? request.context().createChatHistory()
+                    : new ChatHistory();
             chatHistory.addUserMessage(request.content());
 
             return chatService.getChatMessageContentsAsync(chatHistory, kernel, invocationContext)
