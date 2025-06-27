@@ -1,0 +1,25 @@
+{
+    "name": "Semantic Kernel demo using Java 21",
+    "image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "21",
+            "jdkDistro": "ms",
+            "installMaven": "false",
+            "installGradle": "true"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "latest"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vmware.vscode-boot-dev-pack",
+                "redhat.java",
+                "ms-azuretools.vscode-containers",
+                "bradlc.vscode-tailwindcss"
+            ]
+        }
+    }
+}
