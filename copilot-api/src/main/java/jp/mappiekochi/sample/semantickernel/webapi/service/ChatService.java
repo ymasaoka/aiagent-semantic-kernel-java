@@ -2,7 +2,6 @@ package jp.mappiekochi.sample.semantickernel.webapi.service;
 
 import jp.mappiekochi.sample.semantickernel.webapi.dto.ChatMessageRequest;
 import jp.mappiekochi.sample.semantickernel.webapi.dto.ChatMessageResponse;
-import reactor.core.publisher.Mono;
 
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
@@ -12,13 +11,17 @@ import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionServic
 import com.microsoft.semantickernel.services.chatcompletion.ChatHistory;
 
 import java.util.UUID;
+import reactor.core.publisher.Mono;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ChatService {
 
+    @Autowired
     private final Kernel kernel;
+    @Autowired
     private final InvocationContext invocationContext;
 
     public ChatService(Kernel kernel, InvocationContext invocationContext) {
