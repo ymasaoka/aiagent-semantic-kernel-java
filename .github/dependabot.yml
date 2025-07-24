@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "devcontainers"
+    directory: "/.devcontainer"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "gradle"
+    directory: "/copilot-api"
+    schedule:
+      interval: "weekly"
